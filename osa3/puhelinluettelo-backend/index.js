@@ -16,18 +16,6 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :b
 
 const Person = require('./models/person')
 
-/*app.get('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  const person = persons.find(person => person.id === id)
-  
-  if (person) {
-      response.json(person)  
-  } else {    
-    response.status(404).end()  
-  }
-
-})*/
-
 app.get('/api/persons/:id', (request, response) => {
   Person.findById(request.params.id)
     .then(person => {
@@ -40,13 +28,6 @@ app.get('/api/persons/:id', (request, response) => {
     .catch(error => next(error))
 })
 
-/*app.delete('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  persons = persons.filter(person => person.id !== id)
-
-  response.status(204).end()
-})*/
-
 app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndDelete(request.params.id)
     .then(result => {
@@ -54,24 +35,6 @@ app.delete('/api/persons/:id', (request, response, next) => {
     })
     .catch(error => next(error))
 })
-
-/*app.post('/api/persons', (request, response) => {
-  const id = Math.floor(Math.random()*10000)
-
-  const person = request.body
-  person.id = id
-  if (!person.name || !person.number) {
-    return response.status(400).json({ 
-      error: 'content missing' 
-    })
-  }
-  if (persons.find(person => person.name === request.body.name)) {
-    return response.status(400).json({ error: 'name must be unique' })
-  }
-  persons = persons.concat(person)
-
-  response.json(person)
-})*/
 
 app.put('/api/persons/:id', (request, response, next) => {
   const body = request.body

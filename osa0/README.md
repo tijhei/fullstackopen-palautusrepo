@@ -1,4 +1,4 @@
-0.4: uusi muistiinpano
+0.4: uusi muistiinpano (alempana tehtävät 0.5 ja 0.6)
 
 ```mermaid
 sequenceDiagram
